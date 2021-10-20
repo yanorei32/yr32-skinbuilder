@@ -51,8 +51,8 @@ OXANIUM_COMMIT="c3c2229caa3a4d963e43b854f639a9f85fc32dd2"
 
 if [[ ! -e  Oxanium-Regular.ttf ]]; then
 	curl -L -s \
-		--output  Oxanium-Regular.ttf  \
-		https://github.com/sevmeyer/oxanium/raw/${GOOGLE_FONTS_COMMIT}/fonts/ttf/Oxanium-Regular.ttf
+		--output Oxanium-Regular.ttf \
+		https://github.com/sevmeyer/oxanium/raw/${OXANIUM_COMMIT}/fonts/ttf/Oxanium-Regular.ttf
 fi
 
 ###################
