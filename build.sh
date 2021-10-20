@@ -49,28 +49,15 @@ if [[ ! -e  Oxanium-Regular.ttf ]]; then
 		https://github.com/google/fonts/raw/385af64e06099604fd67c2b002c915748892358b/ofl/oxanium/static/Oxanium-Regular.ttf
 fi
 
-if [[ ! -d aristia ]]; then
-	if [[ ! -e aristia.osk ]]; then
-		curl -s \
-			-X POST --output aristia.osk \
-			"https://osuskins.net/download/k38KhZg"
-	fi
-
-	unzip -q aristia.osk -d aristia
-fi
-
 ###################
 
 function generate_empty_wav() {
-	if [[ ! -e empty.wav ]]; then
-		ffmpeg -hide_banner -loglevel error \
-			-t 0 -f s16le -i /dev/zero \
-			-acodec copy \
-			empty.wav
+	if [[ ! -e empty.ogg ]]; then
+		touch empty.ogg
 	fi
 
 	for f in $@; do
-		cp empty.wav yr32/$f.wav
+		cp empty.ogg yr32/$f.ogg
 	done
 }
 
@@ -230,7 +217,6 @@ function generate_mod_image() {
 sound_prefixes=( soft normal drum )
 
 function expand_all_prefix() {
-
 	for f in $@; do
 		for prefix in ${sound_prefixes[@]}; do
 			echo $prefix-$f
@@ -421,7 +407,7 @@ pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
 convert -size 1600x1600 \
 	xc:none \
 	-fill "#00003311" \
-	-stroke "#ffffffee" \
+	-stroke "#ffffff88" \
 	-strokewidth 15 \
 	-draw """
 		circle $center,$center $center,$( expr $center + $len "*" 2 )
@@ -517,43 +503,158 @@ fi
 generate_empty_wav \
 	$(expand_all_prefix sliderslide) \
 	$(expand_all_prefix sliderwhistle) \
+	$(expand_all_prefix hitwhistle) \
 	readys
 
+
 ffmpeg \
-	-i aristia/applause.wav \
-	yr32/applause.mp3
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i aevalsrc="random(0)-0.5:s=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.05[a0];
+			[1]atrim=0:0.05[a1];
+			[a0][a1]acrossfade=d=0.05,highpass=f=200,lowpass=f=5000,volume=15dB
+		""" \
+	normal-hitnormal.ogg
 
-copy_list=( \
-	spinnerbonus.wav \
-	count1s.wav \
-	count2s.wav \
-	count3s.wav \
-	gos.wav \
-	combobreak.wav \
-	sectionpass.wav \
-	sectionfail.wav \
-	failsound.mp3 \
-)
-
-for f in ${copy_list[@]}; do
-	cp aristia/$f yr32/$f
+for prefix in ${sound_prefixes[@]}; do
+	cp normal-hitnormal.ogg yr32/$prefix-hitnormal.ogg
 done
 
-copy_list=(hitclap hitfinish hitnormal hitwhistle slidertick)
-for f in ${copy_list[@]}; do
-	for prefix in ${sound_prefixes[@]}; do
-		cp aristia/normal-$f.wav yr32/$prefix-$f.wav
-	done
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i aevalsrc="random(0)-0.5:s=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.05[a0];
+			[1]atrim=0:0.05[a1];
+			[a0][a1]acrossfade=d=0.05,highpass=f=200,lowpass=f=4000,volume=10dB
+		""" \
+	normal-hitfinish.ogg
+
+for prefix in ${sound_prefixes[@]}; do
+	cp normal-hitfinish.ogg yr32/$prefix-hitfinish.ogg
 done
 
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i aevalsrc="random(0)-0.25:s=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.025[a0];
+			[1]atrim=0:0.025[a1];
+			[a0][a1]acrossfade=d=0.025,highpass=f=5000,lowpass=f=15000,volume=10dB
+		""" \
+	normal-slidertick.ogg
+
+for prefix in ${sound_prefixes[@]}; do
+	cp normal-slidertick.ogg yr32/$prefix-slidertick.ogg
+done
+
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i aevalsrc="random(0)-0.25:s=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.025[a0];
+			[1]atrim=0:0.025[a1];
+			[a0][a1]acrossfade=d=0.025,highpass=f=5000,lowpass=f=8000,volume=10dB
+		""" \
+	normal-hitclap.ogg
+
+for prefix in ${sound_prefixes[@]}; do
+	cp normal-hitclap.ogg yr32/$prefix-hitclap.ogg
+done
+
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i sine="frequency=2000:sample_rate=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.33[a0];
+			[1]atrim=0:0.33[a1];
+			[a0][a1]acrossfade=d=0.33,volume=12dB
+		""" \
+	yr32/combobreak.ogg
+
+cp yr32/combobreak.ogg yr32/gos.ogg
+cp yr32/combobreak.ogg yr32/spinnerbonus.ogg
+
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i sine="frequency=1000:sample_rate=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.33[a0];
+			[1]atrim=0:0.33[a1];
+			[a0][a1]acrossfade=d=0.33,volume=12dB
+		""" \
+	yr32/count1s.ogg
+
+cp yr32/count1s.ogg yr32/count3s.ogg
+cp yr32/count1s.ogg yr32/count2s.ogg
+cp yr32/combobreak.ogg yr32/count1s.ogg
+
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i sine="frequency=2000:sample_rate=44100" \
+	-f lavfi -i anullsrc \
+	-f lavfi -i sine="frequency=1000:sample_rate=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.15[a0];
+			[1]atrim=0:0.15[a1];
+			[a0][a1]acrossfade=d=0.15[a2];
+
+			[2]atrim=0:0.15[a3];
+			[3]atrim=0:0.15[a4];
+			[a3][a4]acrossfade=d=0.15[a5];
+
+			[a2][a5]concat=n=2:v=0:a=1,volume=12dB
+		""" \
+	-t 1 \
+	yr32/sectionpass.ogg
+
+ffmpeg \
+	-hide_banner -loglevel error \
+	-y \
+	-f lavfi -i sine="frequency=1000:sample_rate=44100" \
+	-f lavfi -i anullsrc \
+	-f lavfi -i sine="frequency=1000:sample_rate=44100" \
+	-f lavfi -i anullsrc \
+	-filter_complex \
+		"""
+			[0]atrim=0:0.15[a0];
+			[1]atrim=0:0.15[a1];
+			[a0][a1]acrossfade=d=0.15[a2];
+
+			[2]atrim=0:0.15[a3];
+			[3]atrim=0:0.15[a4];
+			[a3][a4]acrossfade=d=0.15[a5];
+
+			[a2][a5]concat=n=2:v=0:a=1,volume=12dB
+		""" \
+	-t 1 \
+	yr32/sectionfail.ogg
 
 ####################
 
 cd ./yr32
-
-# for f in $(ls *@2x.png); do
-# 	convert $f -resize 50% ${f%@2x*}.png
-# done
 
 cp "${DIR}/skin.ini" skin.ini
 
