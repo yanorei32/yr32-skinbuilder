@@ -38,7 +38,7 @@ cd "${DIR}/workdir"
 ####################
 
 # depName=git@github.com:googlefonts/Inconsolata.git
-INCONSOLATA_COMMIT="e0c6cfb8df929029c123fa01d036a81b3146d0e7"
+INCONSOLATA_COMMIT="b8dbb7714534a1b60145fc46d08e7a417aa30e7d"
 
 if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -s \
