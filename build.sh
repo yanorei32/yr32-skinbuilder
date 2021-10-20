@@ -47,7 +47,7 @@ if [[ ! -e Inconsolata-Black.ttf ]]; then
 fi
 
 # depName=git@github.com:sevmeyer/oxanium.git
-OXANIUM_COMMIT="c3c2229caa3a4d963e43b854f639a9f85fc32dd2"
+OXANIUM_COMMIT="a8f39e0c71186190027a093e9001459410192d1e"
 
 if [[ ! -e  Oxanium-Regular.ttf ]]; then
 	curl -L -s \
