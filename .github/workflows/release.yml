@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: "build"
         run: ./build.sh
 
@@ -22,9 +24,4 @@ jobs:
           title: "Development Build"
           files: |
             yr32-skinbuilder.osk
-
-
-
-
-
 
