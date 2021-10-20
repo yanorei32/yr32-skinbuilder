@@ -38,7 +38,7 @@ cd "${DIR}/workdir"
 ####################
 
 # depName=git@github.com:google/fonts.git
-GOOGLE_FONTS_COMMIT="385af64e06099604fd67c2b002c915748892358b"
+GOOGLE_FONTS_COMMIT="463567a2ace0017f54b005f7bc111f9823e6138e"
 
 if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -s \
