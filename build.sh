@@ -37,19 +37,22 @@ cd "${DIR}/workdir"
 
 ####################
 
-# depName=git@github.com:google/fonts.git
-GOOGLE_FONTS_COMMIT="385af64e06099604fd67c2b002c915748892358b"
+# depName=git@github.com:googlefonts/Inconsolata.git
+INCONSOLATA_COMMIT="e0c6cfb8df929029c123fa01d036a81b3146d0e7"
 
 if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -s \
 		--output Inconsolata-Black.ttf \
-		https://github.com/google/fonts/raw/${GOOGLE_FONTS_COMMIT}/ofl/inconsolata/static/Inconsolata-Black.ttf
+		https://github.com/googlefonts/Inconsolata/raw/${INCONSOLATA_COMMIT}/fonts/ttf/Inconsolata-Black.ttf
 fi
+
+# depName=git@github.com:sevmeyer/oxanium.git
+OXANIUM_COMMIT="c3c2229caa3a4d963e43b854f639a9f85fc32dd2"
 
 if [[ ! -e  Oxanium-Regular.ttf ]]; then
 	curl -L -s \
-		--output  Oxanium-Regular.ttf  \
-		https://github.com/google/fonts/raw/${GOOGLE_FONTS_COMMIT}/ofl/oxanium/static/Oxanium-Regular.ttf
+		--output Oxanium-Regular.ttf \
+		https://github.com/sevmeyer/oxanium/raw/${OXANIUM_COMMIT}/fonts/ttf/Oxanium-Regular.ttf
 fi
 
 ###################
