@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/github/license/yanorei32/yr32-skinbuilder.svg?style=for-the-badge&color=blue)
 ![Top Language](https://img.shields.io/github/languages/top/yanorei32/yr32-skinbuilder.svg?style=for-the-badge)
 
-## A simple, lightweight, free osu! skin
+## A simple, lightweight, open-source osu! skin
 
 ![Demo](https://github.com/yanorei32/yr32-skinbuilder/raw/contents/demo.gif)
 
