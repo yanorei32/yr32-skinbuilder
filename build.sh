@@ -5,7 +5,7 @@ shopt -s extglob
 
 ####################
 
-depends=( ffmpeg curl unzip zip convert bc awk )
+depends=( ffmpeg curl unzip zip convert bc )
 notfound=()
 
 for app in ${depends[@]}; do
@@ -261,36 +261,26 @@ generate_empty_png \
 	scorebar-bg@2x
 
 convert -size 128x128 \
-	radial-gradient:#50506733-#a0a0cfee \
-	\( \
-		-size 128x128 \
-		xc:none \
-		-draw "circle 64,64 64,24" \
-	\) \
-	-compose dst_in -composite \
+	xc:none \
+	-fill none \
+	-stroke "#ffff99cc" \
+	-strokewidth 7.5 \
+	-draw """
+		circle 64,64 64,32
+	""" \
+	-stroke "#ffff99ff" \
+	-strokewidth 2 \
+	-draw """
+		line 64,48 64,80
+	""" \
+	-draw """
+		line 48,64 80,64
+	""" \
 	yr32/cursor@2x.png
 
 convert -size 32x32 \
 	xc:#50506733 \
 	yr32/cursor-smoke@2x.png
-
-len=20
-center=50
-pos_x_left=$( expr $center - $len )
-pos_x_right=$( expr $center + $len "*" 2 )
-pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
-pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
-
-convert -size 100x100 \
-	xc:none \
-	-fill '#aaaaaa33' \
-	-strokewidth 5 \
-	-stroke '#ffffff99' \
-	-draw "polygon $pos_x_left,$pos_y_top $pos_x_left,$pos_y_bottom $pos_x_right,$center" \
-	-rotate 180 \
-	-draw "polygon $pos_x_left,$pos_y_top $pos_x_left,$pos_y_bottom $pos_x_right,$center" \
-	-rotate 90 \
-	yr32/star@2x.png
 
 convert -size 1600x220 \
 	-define gradient:angle=45 \
@@ -318,54 +308,6 @@ convert -size 1600x220 \
 convert -size 1290x10 \
 	xc:#aaaaff40 \
 	yr32/scorebar-colour@2x.png
-#
-# convert -size 512x512 \
-# 	'xc:#eeeeeeff' \
-# 	-background transparent \
-# 	-gravity center \
-# 	\( \
-# 		-size 500x28 \
-# 		xc:white \
-# 		-rotate 45 \
-# 		\( +clone -flip \) \
-# 		-compose dst_over \
-# 		-composite \
-# 	\) \
-# 	-compose dst_in \
-# 	-composite \
-# 	\( \
-# 		+clone \
-# 		-background "#33333366" \
-# 		-shadow 80x3+3+3 \
-# 	\) \
-# 	-background transparent \
-# 	+swap \
-# 	-layers merge \
-# 	+repage \
-# 	-trim \
-# 	yr32/section-fail@2x.png
-#
-# convert -size 512x512 \
-# 	xc:none \
-# 	-background transparent \
-# 	-gravity center \
-# 	-fill none \
-# 	-stroke '#eeeeeeff' \
-# 	-strokewidth 25 \
-# 	-draw """
-# 		circle 256,256 256,15
-# 	""" \
-# 	\( \
-# 		+clone \
-# 		-background "#33333366" \
-# 		-shadow 80x3+3+3 \
-# 	\) \
-# 	-background transparent \
-# 	+swap \
-# 	-layers merge \
-# 	+repage \
-# 	-trim \
-# 	yr32/section-pass@2x.png
 
 generate_ranking_image xh SS '#eeeeeeff' +0
 generate_ranking_image sh S '#eeeeeeff' +0
@@ -379,7 +321,6 @@ generate_ranking_image d D '#bb6666ff' +0
 for n in `seq 0 9`; do
 	generate_single_char_image $n 64 yr32/score-$n@2x.png
 done
-
 
 generate_single_char_image ',' 64 yr32/score-comma@2x.png
 generate_single_char_image '.' 64 yr32/score-dot@2x.png
@@ -397,7 +338,7 @@ for f in ./yr32/score-*@2x.png; do
 done
 
 generate_string_image 192 '#eeeeeeff' 0 0 '!UNRANKED!' yr32/play-unranked@2x.png
-generate_string_image 192 '#eeeeeeff' 0 0 'CLEAR' yr32/spinner-clear@2x.png
+generate_string_image 128 '#eeeeeeff' 0 0 'CLEAR' yr32/spinner-clear@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 'PASS' yr32/section-pass@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 'FAILURE' yr32/section-fail@2x.png
 generate_string_image 96 '#eeeeeeff' 0 0 '- PERFECT -' yr32/ranking-perfect@2x.png
@@ -406,16 +347,53 @@ generate_string_image 64 '#eeeeeeff' 0 0 'accuracy' yr32/ranking-accuracy@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 '3' yr32/count3@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 '2' yr32/count2@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 '1' yr32/count1@2x.png
+generate_string_image 96 '#eeeeeeff'  0 5 '#' yr32/star@2x.png
 generate_string_image 128 '#eeeeeeff' 0 0 'START' yr32/go@2x.png
+generate_string_image 192 '#eeeeee99' 0 0 '>' yr32/arrow-warning@2x.png
+generate_string_image 192 '#eeeeee99' 0 0 '>' yr32/arrow-pause@2x.png
+generate_string_image 128 '#eeeeeeff' 0 0 '- Continue -' yr32/pause-continue@2x.png
+generate_string_image 128 '#eeeeeeff' 0 0 '- Retry -' yr32/pause-retry@2x.png
+generate_string_image 128 '#eeeeeeff' 0 0 '- Replay -' yr32/pause-replay@2x.png
+generate_string_image 128 '#eeeeeeff' 0 0 '- Back -' yr32/pause-back@2x.png
+generate_string_image 192 '#eeeeeeff' 0 0 'Skip >>' yr32/play-skip@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[EZ]' yr32/selection-mod-easy@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[NF]' yr32/selection-mod-nofail@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[HT]' yr32/selection-mod-halftime@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[HR]' yr32/selection-mod-hardrock@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[SD]' yr32/selection-mod-suddendeath@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[PF]' yr32/selection-mod-perfect@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[DT]' yr32/selection-mod-doubletime@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[NC]' yr32/selection-mod-nightcore@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[HD]' yr32/selection-mod-hidden@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[FD]' yr32/selection-mod-fadein@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[FL]' yr32/selection-mod-flashlight@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[RX]' yr32/selection-mod-relax@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[RX]' yr32/selection-mod-relax2@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[SO]' yr32/selection-mod-spunout@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[AP]' yr32/selection-mod-autoplay@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[v2]' yr32/selection-mod-scorev2@2x.png
+generate_string_image 48 '#eeeeeeff' 20 25 'spin/min' yr32/spinner-rpm@2x.png
+
+
+convert -size 560x120 \
+	-define gradient:angle=90 \
+	gradient:#33333388-#33333333 \
+	yr32/spinner-rpm@2x.png \
+	-composite \
+	yr32/spinner-rpm@2x.png
 
 
 convert -size 1200x975 \
 	-define gradient:angle=135 \
 	gradient:#00003388-#00003300 \
-	-fill '#000033aa' \
-	-draw "polygon 0,110 0,130 1200,110 1200,110" \
+	-fill '#ffffff33' \
+	-draw "polygon 0,140 0,160 1200,160 1200,140" \
 	yr32/ranking-panel@2x.png
 
+convert -size 616x296 \
+	-define gradient:angle=135 \
+	gradient:#00003388-#00003300 \
+	yr32/ranking-graph@2x.png
 
 # osu! play textures
 generate_empty_png \
@@ -457,7 +435,7 @@ convert -size 1600x1600 \
 
 convert -size 256x256 \
 	xc:none \
-	-stroke  "#ffffffff" \
+	-stroke  "#ffffffdd" \
 	-strokewidth 12 \
 	-fill none \
 	-draw "circle 128,128 128,15" \
@@ -467,7 +445,7 @@ cp yr32/hitcircleoverlay@2x.png yr32/sliderb@2x.png
 
 convert -size 256x256 \
 	xc:none \
-	-stroke  "#ffffff88" \
+	-stroke  "#ffffff55" \
 	-strokewidth 5 \
 	-fill none \
 	-draw "circle 128,128 128,15" \
@@ -494,7 +472,7 @@ done
 
 for n in `seq 0 9`; do
 	convert -size 256x8 \
-		"radial-gradient:#ffffff1${n}-#ffffff00" \
+		"radial-gradient:#ffffff2${n}-#ffffff00" \
 		yr32/followpoint-$(expr $n + 3)@2x.png
 done
 
