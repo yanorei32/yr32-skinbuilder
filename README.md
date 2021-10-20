@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/github/license/yanorei32/yr32-skinbuilder.svg?style=for-the-badge&color=blue)
 ![Top Language](https://img.shields.io/github/languages/top/yanorei32/yr32-skinbuilder.svg?style=for-the-badge)
 
-yr32's osu! skin - A open-source, simple osu! skin
+## A simple, lightweight, free osu! skin
 
 ![Demo](https://github.com/yanorei32/yr32-skinbuilder/raw/contents/demo.gif)
 
@@ -16,9 +16,9 @@ https://github.com/yanorei32/yr32-skinbuilder/releases/download/latest/yr32-skin
 
 ### Officially supported platforms
 
-* osu! (Windows)
-* osu!lazer (Windows / Linux / Android)
-* McOsu (Windows)
+* **osu! (Windows) (complete)**
+* **osu!lazer (Windows / Linux / Android) (complete)**
+* McOsu (Windows) (partially)
 
 ### No longer supported platforms
 * opsu! (Windows / Android)
@@ -27,26 +27,26 @@ https://github.com/yanorei32/yr32-skinbuilder/releases/download/latest/yr32-skin
 
 ### osu!
 
-| Key                                                      | Value   |
-|:---------------------------------------------------------|:--------|
-| `Graphics/DETAIL SETTINGS/Hit lighting`                  | `false` |
-| `GAMEPLAY/GENERAL/Background dim`                        | `90% +` |
-| `GAMEPLAY/GENERAL/Dont't change dim level during breaks` | `true`  |
-| `SKIN/SKIN/Ignore all beatmap skins`                     | `true`  |
-| `SKIN/SKIN/Always use skin cursor`                       | `true`  |
+| Key                                                    | Value |
+|:-------------------------------------------------------|:------|
+| Graphics/DETAIL SETTINGS/Hit lighting                  | false |
+| Gameplay/GENERAL/Background dim                        | 90% + |
+| Gameplay/GENERAL/Dont't change dim level during breaks | true  |
+| Skin/SKIN/Ignore all beatmap skins                     | true  |
+| Skin/SKIN/Always use skin cursor                       | true  |
 
 ### osu!lazer
 
-| Key                                                            | Value   |
-|:---------------------------------------------------------------|:--------|
-| `Gameplay/General/Hit lighting`                                | `false` |
-| `Gameplay/Beatmap/Beatmap skins`                               | `false` |
-| `Gameplay/Beatmap/Beatmap colours`                             | `false` |
-| `Gameplay/Beatmap/Beatmap hitsounds`                           | `false` |
-| `Gameplay/Background/Background dim`                           | `90% +` |
-| `Gameplay/Background/Background blur`                          | `50% +` |
-| `Gameplay/Background/Lighten playfield during breaks`          | `false` |
-| `Gameplay/Background/Fade playfield to red when health is low` | `false` |
+| Key                                                          | Value |
+|:-------------------------------------------------------------|:------|
+| Gameplay/General/Hit lighting                                | false |
+| Gameplay/Beatmap/Beatmap skins                               | false |
+| Gameplay/Beatmap/Beatmap colours                             | false |
+| Gameplay/Beatmap/Beatmap hitsounds                           | false |
+| Gameplay/Background/Background dim                           | 90% + |
+| Gameplay/Background/Background blur                          | 50% + |
+| Gameplay/Background/Lighten playfield during breaks          | false |
+| Gameplay/Background/Fade playfield to red when health is low | false |
 
 ## Self-build .osk file from shellscript
 
@@ -54,7 +54,7 @@ https://github.com/yanorei32/yr32-skinbuilder/releases/download/latest/yr32-skin
 
 * Arch Linux
 * Debian GNU/Linux
-* WSL2/Ubuntu (Windows)
+* WSL2 (Windows / Ubuntu)
 * Termux (Android)
 
 ### Pre-requirements for build
@@ -65,11 +65,12 @@ https://github.com/yanorei32/yr32-skinbuilder/releases/download/latest/yr32-skin
 * imagemagick
 * bc
 
-### Build
+### Build .osk file
 
 ```bash
 git clone https://github.com/yanorei32/yr32-skinbuilder
 cd yr32-skinbuilder
+
 ./build.sh
 ```
 
