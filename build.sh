@@ -37,16 +37,19 @@ cd "${DIR}/workdir"
 
 ####################
 
+# depName=git@github.com:google/fonts.git
+GOOGLE_FONTS_COMMIT="385af64e06099604fd67c2b002c915748892358b"
+
 if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -s \
 		--output Inconsolata-Black.ttf \
-		https://github.com/google/fonts/raw/385af64e06099604fd67c2b002c915748892358b/ofl/inconsolata/static/Inconsolata-Black.ttf
+		https://github.com/google/fonts/raw/${GOOGLE_FONTS_COMMIT}/ofl/inconsolata/static/Inconsolata-Black.ttf
 fi
 
 if [[ ! -e  Oxanium-Regular.ttf ]]; then
 	curl -L -s \
 		--output  Oxanium-Regular.ttf  \
-		https://github.com/google/fonts/raw/385af64e06099604fd67c2b002c915748892358b/ofl/oxanium/static/Oxanium-Regular.ttf
+		https://github.com/google/fonts/raw/${GOOGLE_FONTS_COMMIT}/ofl/oxanium/static/Oxanium-Regular.ttf
 fi
 
 ###################
@@ -657,6 +660,7 @@ ffmpeg \
 cd ./yr32
 
 cp "${DIR}/skin.ini" skin.ini
+cp "${DIR}/README.md" README.md
 
-zip -r "${DIR}/yr32.osk" .
+zip -r "${DIR}/yr32-skinbuilder.osk" .
 

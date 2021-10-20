@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["digest"],
+      "automerge": true
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["build.sh"],
+      "matchStrings": ["depName=(?<depName>.*?)?\\s.*?_COMMIT=\"(?<currentValue>)(?<currentDigest>.*?)\""],
+      "versioningTemplate": "git",
+      "datasourceTemplate": "git-refs"
+    }
+  ]
+}

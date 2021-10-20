@@ -1,0 +1,18 @@
+name: "build"
+
+on:
+  pull_request:
+    paths:
+      - 'build.sh'
+      - '.github/workflows/build.yml'
+
+jobs:
+  build:
+    name: "build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "build"
+        run: ./build.sh
+
+

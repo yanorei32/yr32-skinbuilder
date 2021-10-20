@@ -1,6 +1,7 @@
 # yr32's osu! skin
+https://github.com/yanorei32/yr32-skinbuilder
 
-## requirements
+## pre-requirements
 
 * ffmpeg
 * curl
@@ -8,10 +9,9 @@
 * imagemagick
 * bc
 
-## How to
+## How to build osk
 
 ```bash
 ./build.sh
 ```
-
 
