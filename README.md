@@ -4,6 +4,8 @@
 ![License](https://img.shields.io/github/license/yanorei32/yr32-skinbuilder.svg?style=for-the-badge&color=blue)
 ![Top Language](https://img.shields.io/github/languages/top/yanorei32/yr32-skinbuilder.svg?style=for-the-badge)
 
+![Demo](https://github.com/yanorei32/yr32-skinbuilder/raw/contents/demo.gif)
+
 ## download (latest)
 https://github.com/yanorei32/yr32-skinbuilder/releases
 
