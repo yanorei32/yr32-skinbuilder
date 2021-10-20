@@ -7,7 +7,7 @@
 ![Demo](https://github.com/yanorei32/yr32-skinbuilder/raw/contents/demo.gif)
 
 ## download (latest)
-https://github.com/yanorei32/yr32-skinbuilder/releases
+https://github.com/yanorei32/yr32-skinbuilder/releases/download/latest/yr32-skinbuilder.osk
 
 ## pre-requirements
 
