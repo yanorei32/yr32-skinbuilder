@@ -664,6 +664,7 @@ cd ./yr32
 
 cp "${DIR}/skin.ini" skin.ini
 cp "${DIR}/README.md" README.md
+cp "${DIR}/LICENSE" LICENSE
 
 zip -r "${DIR}/yr32-skinbuilder.osk" .
 
