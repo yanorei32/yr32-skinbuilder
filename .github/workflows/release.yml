@@ -27,5 +27,5 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            yr32-skinbuilder.osk
+            yr32-skinbuilder@*.osk
 

@@ -683,3 +683,4 @@ cp "${DIR}/LICENSE" LICENSE
 
 zip -r "${DIR}/yr32-skinbuilder@$VERSION_NAME.osk" .
 
+

@@ -12,7 +12,7 @@
 
 Prebuild binaries can be downloaded from this link.
 
-https://github.com/yanorei32/yr32-skinbuilder/releases/download/latest/yr32-skinbuilder.osk
+https://github.com/yanorei32/yr32-skinbuilder/releases
 
 ### Officially supported platforms
 
