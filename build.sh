@@ -612,7 +612,6 @@ ffmpeg \
 
 cp yr32/count1s.ogg yr32/count3s.ogg
 cp yr32/count1s.ogg yr32/count2s.ogg
-cp yr32/combobreak.ogg yr32/count1s.ogg
 
 ffmpeg \
 	-hide_banner -loglevel error \
