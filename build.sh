@@ -661,9 +661,6 @@ ffmpeg \
 
 cd ./yr32
 
-
-VERSION_NAME=$(git rev-parse --short HEAD)
-
 set +u
 if [[ -n "$GITHUB_REF" ]]; then
 	VERSION_NAME=${GITHUB_REF##*/}
