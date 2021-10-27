@@ -671,6 +671,8 @@ if [[ -n "$GITHUB_REF" ]]; then
 
 	if [[ $VERSION_NAME == "master" ]]; then
 		VERSION_NAME=$(git rev-parse --short HEAD)
+	elif [[ ${VERSION_NAME:0:1} == "v" ]]; then
+		VERSION_NAME=${VERSION_NAME:1}
 	fi
 fi
 
