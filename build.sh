@@ -516,13 +516,13 @@ generate_empty_wav \
 ffmpeg \
 	-hide_banner -loglevel error \
 	-y \
-	-f lavfi -i aevalsrc="random(0)-0.5:s=44100" \
+	-f lavfi -i aevalsrc="random(0)-0.25:s=44100" \
 	-f lavfi -i anullsrc \
 	-filter_complex \
 		"""
-			[0]atrim=0:0.05[a0];
-			[1]atrim=0:0.05[a1];
-			[a0][a1]acrossfade=d=0.05,highpass=f=200,lowpass=f=5000,volume=15dB
+			[0]atrim=0:0.025[a0];
+			[1]atrim=0:0.025[a1];
+			[a0][a1]acrossfade=d=0.025,highpass=f=200,lowpass=f=5000,volume=15dB
 		""" \
 	normal-hitnormal.ogg
 
