@@ -662,9 +662,24 @@ ffmpeg \
 
 cd ./yr32
 
-cp "${DIR}/skin.ini" skin.ini
+
+VERSION_NAME=$(git rev-parse --short HEAD)
+
+set +u
+if [[ -n "$GITHUB_REF" ]]; then
+	VERSION_NAME=${GITHUB_REF##*/}
+
+	if [[ $VERSION_NAME == "master" ]]; then
+		VERSION_NAME=$(git rev-parse --short HEAD)
+	fi
+fi
+
+set -u
+
+cat "${DIR}/skin.ini" | sed s/SB_VERSION/$VERSION_NAME/g > skin.ini
+
 cp "${DIR}/README.md" README.md
 cp "${DIR}/LICENSE" LICENSE
 
-zip -r "${DIR}/yr32-skinbuilder.osk" .
+zip -r "${DIR}/yr32-skinbuilder@$VERSION_NAME.osk" .
 
