@@ -1,6 +1,6 @@
 # yr32's osu! skin
 
-![Build](https://img.shields.io/github/workflow/status/yanorei32/yr32-skinbuilder/build?logo=github&style=for-the-badge)
+![Build](https://img.shields.io/github/workflow/status/yanorei32/yr32-skinbuilder/release?logo=github&style=for-the-badge)
 ![License](https://img.shields.io/github/license/yanorei32/yr32-skinbuilder.svg?style=for-the-badge&color=blue)
 ![Top Language](https://img.shields.io/github/languages/top/yanorei32/yr32-skinbuilder.svg?style=for-the-badge)
 
