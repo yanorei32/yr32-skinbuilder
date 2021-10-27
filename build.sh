@@ -673,6 +673,8 @@ if [[ -n "$GITHUB_REF" ]]; then
 	elif [[ ${VERSION_NAME:0:1} == "v" ]]; then
 		VERSION_NAME=${VERSION_NAME:1}
 	fi
+else
+	VERSION_NAME=localbuild
 fi
 
 set -u
