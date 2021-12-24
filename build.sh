@@ -5,8 +5,20 @@ shopt -s extglob
 
 ####################
 
-depends=( ffmpeg curl unzip zip convert bc )
+set +u
+if [[ "${STYLE}" != "number" ]]; then
+	STYLE=dot
+fi
+set -u
+
+####################
+
+depends=( ffmpeg curl zip convert bc )
 notfound=()
+
+if [[ "${STYLE}" == "number" ]]; then
+	depends+=("unzip")
+fi
 
 for app in ${depends[@]}; do
 	if ! type $app > /dev/null 2>&1; then
@@ -37,11 +49,25 @@ cd "${DIR}/workdir"
 
 ####################
 
+if [[ "${STYLE}" == "number" ]]; then
+	# depName=rsms/inter
+	INTER_VERSION="v3.18"
+	PURE_INTER_VERSION="${INTER_VERSION:1}"
+
+	if [[ ! -e "Inter-$PURE_INTER_VERSION.zip" ]]; then
+		curl -L -f -s \
+			--output "Inter-$PURE_INTER_VERSION.zip" \
+			https://github.com/rsms/inter/releases/download/$INTER_VERSION/Inter-$PURE_INTER_VERSION.zip
+
+		unzip -p Inter-$PURE_INTER_VERSION.zip "Inter Desktop/Inter-Medium.otf" > Inter-Medium.otf
+	fi
+fi
+
 # depName=git@github.com:googlefonts/Inconsolata.git
 INCONSOLATA_COMMIT="b8dbb7714534a1b60145fc46d08e7a417aa30e7d"
 
 if [[ ! -e Inconsolata-Black.ttf ]]; then
-	curl -L -s \
+	curl -L -f -s \
 		--output Inconsolata-Black.ttf \
 		https://github.com/googlefonts/Inconsolata/raw/${INCONSOLATA_COMMIT}/fonts/ttf/Inconsolata-Black.ttf
 fi
@@ -50,7 +76,7 @@ fi
 OXANIUM_COMMIT="a8f39e0c71186190027a093e9001459410192d1e"
 
 if [[ ! -e  Oxanium-Regular.ttf ]]; then
-	curl -L -s \
+	curl -L -f -s \
 		--output Oxanium-Regular.ttf \
 		https://github.com/sevmeyer/oxanium/raw/${OXANIUM_COMMIT}/fonts/ttf/Oxanium-Regular.ttf
 fi
@@ -163,6 +189,30 @@ function generate_single_char_image(){
 		+swap \
 		-layers merge \
 		+repage \
+		$output
+}
+
+function generate_circle_number(){
+	char=$1
+	output=$2
+
+	convert \
+		-font "Inter-Medium.otf" \
+		-fill white \
+		-weight Bold \
+		-pointsize 120 \
+		-background transparent \
+		"label:$char" \
+		\( \
+			+clone \
+			-background "#33333366" \
+			-shadow 80x2+2+2 \
+		\) \
+		-background transparent \
+		+swap \
+		-layers merge \
+		+repage \
+		-background "#00000000" -gravity north -splice 0x10 \
 		$output
 }
 
@@ -453,13 +503,27 @@ convert -size 256x256 \
 	-compose dst_in -composite \
 	yr32/hitcircle@2x.png
 
-# plz set skin.ini [Fonts] HitCircleOverlap to size
+
+
 for n in `seq 0 9`; do
-	convert -size 64x64 \
-		xc:none \
-		-fill "#eeeeeeff" \
-		-draw "circle 32,32 32,1" \
-		yr32/default-$n@2x.png
+	if [[ "${STYLE}" == "dot" ]]; then
+		HIT_CIRCLE_OVERLAP=32
+
+		convert -size 64x64 \
+			xc:none \
+			-fill "#eeeeeeff" \
+			-draw "circle 32,32 32,1" \
+			yr32/default-$n@2x.png
+
+		convert yr32/default-$n@2x.png \
+			-background "#00000000" \
+			-gravity north \
+			-splice 0x10 \
+			yr32/default-$n@2x.png
+	else
+		HIT_CIRCLE_OVERLAP=10
+		generate_circle_number $n yr32/default-$n@2x.png
+	fi
 done
 
 for n in `seq 0 9`; do
@@ -676,11 +740,13 @@ fi
 
 set -u
 
-cat "${DIR}/skin.ini" | sed s/SB_VERSION/$VERSION_NAME/g > skin.ini
+cat "${DIR}/skin.ini" \
+	| sed s/SB_VERSION/$VERSION_NAME/g \
+	| sed s/HIT_CIRCLE_OVERLAP/$HIT_CIRCLE_OVERLAP/g \
+	> skin.ini
 
 cp "${DIR}/README.md" README.md
 cp "${DIR}/LICENSE" LICENSE
 
-zip -r "${DIR}/yr32-skinbuilder@$VERSION_NAME.osk" .
-
+zip -r "${DIR}/yr32-skinbuilder-$STYLE@$VERSION_NAME.osk" .
 

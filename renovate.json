@@ -14,6 +14,12 @@
       "matchStrings": ["depName=(?<depName>.*?)?\\s.*?_COMMIT=\"(?<currentValue>)(?<currentDigest>.*?)\""],
       "versioningTemplate": "git",
       "datasourceTemplate": "git-refs"
+    },
+    {
+      "fileMatch": ["build.sh"],
+      "matchStrings": ["depName=(?<depName>.*?)?\\s.*?_VERSION=\"(?<currentValue>.*?)\""],
+      "versioningTemplate": "docker",
+      "datasourceTemplate": "github-releases"
     }
   ]
 }

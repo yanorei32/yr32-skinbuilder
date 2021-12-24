@@ -18,6 +18,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: build
-        run: ./build.sh
+      - name: build-dot
+        run: |
+          STYLE=dot ./build.sh
+
+      - name: build-number
+        run: |
+          STYLE=number./build.sh
 
