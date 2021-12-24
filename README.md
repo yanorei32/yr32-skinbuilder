@@ -64,6 +64,7 @@ https://github.com/yanorei32/yr32-skinbuilder/releases
 * zip / unzip
 * imagemagick
 * bc
+* inkscape
 
 ### Build .osk file
 

@@ -19,6 +19,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install inkscape
+        run: sudo apt-get install -y inkscape
+
       - name: build-dot
         run: |
           STYLE=dot ./build.sh
