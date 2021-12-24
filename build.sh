@@ -410,9 +410,9 @@ generate_string_image 64 '#eeeeeeff' 0 0 '[HD]' yr32/selection-mod-hidden@2x.png
 generate_string_image 64 '#eeeeeeff' 0 0 '[FD]' yr32/selection-mod-fadein@2x.png
 generate_string_image 64 '#eeeeeeff' 0 0 '[FL]' yr32/selection-mod-flashlight@2x.png
 generate_string_image 64 '#eeeeeeff' 0 0 '[RX]' yr32/selection-mod-relax@2x.png
-generate_string_image 64 '#eeeeeeff' 0 0 '[RX]' yr32/selection-mod-relax2@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[AP]' yr32/selection-mod-relax2@2x.png
 generate_string_image 64 '#eeeeeeff' 0 0 '[SO]' yr32/selection-mod-spunout@2x.png
-generate_string_image 64 '#eeeeeeff' 0 0 '[AP]' yr32/selection-mod-autoplay@2x.png
+generate_string_image 64 '#eeeeeeff' 0 0 '[AO]' yr32/selection-mod-autoplay@2x.png
 generate_string_image 64 '#eeeeeeff' 0 0 '[v2]' yr32/selection-mod-scorev2@2x.png
 generate_string_image 48 '#eeeeeeff' 20 25 'spin/min' yr32/spinner-rpm@2x.png
 
