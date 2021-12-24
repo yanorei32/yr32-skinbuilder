@@ -51,7 +51,7 @@ cd "${DIR}/workdir"
 
 if [[ "${STYLE}" == "number" ]]; then
 	# depName=rsms/inter
-	INTER_VERSION="v3.18"
+	INTER_VERSION="v3.19"
 	PURE_INTER_VERSION="${INTER_VERSION:1}"
 
 	if [[ ! -e "Inter-$PURE_INTER_VERSION.zip" ]]; then
