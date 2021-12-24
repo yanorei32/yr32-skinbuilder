@@ -1,4 +1,4 @@
-name: "build"
+name: build
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: "build"
+    name: build
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "build"
+      - name: build
         run: ./build.sh
-
 
