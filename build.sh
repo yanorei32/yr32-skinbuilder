@@ -379,7 +379,7 @@ for f in ./yr32/score-*@2x.png; do
 		yr32/scoreentry-$char@2x.png
 done
 
-generate_string_image 192 '#eeeeeeff' 0 0 '!UNRANKED!' yr32/play-unranked@2x.png
+generate_string_image 160 '#eeeeeeff' 0 0 '!UNRANKED!' yr32/play-unranked@2x.png
 generate_string_image 128 '#eeeeeeff' 0 0 'CLEAR' yr32/spinner-clear@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 'PASS' yr32/section-pass@2x.png
 generate_string_image 192 '#eeeeeeff' 0 0 'FAILURE' yr32/section-fail@2x.png
