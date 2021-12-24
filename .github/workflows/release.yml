@@ -25,7 +25,7 @@ jobs:
 
       - name: build-number
         run: |
-          STYLE=number./build.sh
+          STYLE=number ./build.sh
 
       - name: pre-release
         uses: "marvinpinto/action-automatic-releases@latest"
