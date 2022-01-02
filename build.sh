@@ -7,7 +7,7 @@ shopt -s extglob
 
 set +u
 if [[ "${STYLE}" != "number" ]]; then
-	STYLE=dot
+	STYLE="dot"
 fi
 set -u
 
@@ -20,17 +20,17 @@ if [[ "${STYLE}" == "number" ]]; then
 	depends+=("unzip")
 fi
 
-for app in ${depends[@]}; do
-	if ! type $app > /dev/null 2>&1; then
-		notfound+=($app)
+for app in "${depends[@]}"; do
+	if ! type "$app" > /dev/null 2>&1; then
+		notfound+=("$app")
 	fi
 done
 
 if [[ ${#notfound[@]} -ne 0 ]]; then
 	echo Failed to lookup dependency:
 
-	for app in ${notfound[@]}; do
-		echo - $app
+	for app in "${notfound[@]}"; do
+		echo "- $app"
 	done
 
 	exit 1
@@ -38,7 +38,7 @@ fi
 
 ####################
 
-DIR=$(cd $(dirname $0) && pwd)
+DIR="$(cd $(dirname $0) && pwd)"
 
 ####################
 
@@ -91,7 +91,7 @@ function generate_empty_wav() {
 		touch empty.ogg
 	fi
 
-	for f in $@; do
+	for f in "$@"; do
 		cp empty.ogg yr32/$f.ogg
 	done
 }
@@ -103,7 +103,7 @@ function generate_empty_png() {
 			empty.png
 	fi
 
-	for f in $@; do
+	for f in "$@"; do
 		cp empty.png yr32/$f.png
 	done
 }
@@ -119,7 +119,7 @@ function generate_hit_emoji() {
 		-font "Inconsolata-Black.ttf" \
 		-pointsize 64 \
 		-fill white \
-		-stroke $color \
+		-stroke "$color" \
 		-strokewidth 4 \
 		-background transparent \
 		"label:$label" \
@@ -134,7 +134,7 @@ function generate_hit_emoji() {
 		+repage \
 		-rotate 5 \
 		-trim \
-		$output
+		"$output"
 }
 
 function generate_ranking_image() {
@@ -154,7 +154,7 @@ function generate_ranking_image() {
 		-fill "$color" \
 		-background transparent \
 		"label:$rankchar" \
-		-roll ${yshift}+50 \
+		-roll "${yshift}+50" \
 		\( \
 			+clone \
 			-background "#33333366" \
@@ -164,12 +164,12 @@ function generate_ranking_image() {
 		+swap \
 		-layers merge \
 		+repage \
-		yr32/ranking-$rankname@2x.png
+		"yr32/ranking-$rankname@2x.png"
 
 	convert \
-		yr32/ranking-$rankname@2x.png \
+		"yr32/ranking-$rankname@2x.png" \
 		-resize 64x \
-		yr32/ranking-$rankname-small@2x.png
+		"yr32/ranking-$rankname-small@2x.png"
 }
 
 function generate_single_char_image(){
@@ -180,7 +180,7 @@ function generate_single_char_image(){
 	convert \
 		-font "Oxanium-Regular.ttf" \
 		-fill white \
-		-pointsize $2 \
+		-pointsize "$2" \
 		-background transparent \
 		"label:$char" \
 		\( \
@@ -192,7 +192,7 @@ function generate_single_char_image(){
 		+swap \
 		-layers merge \
 		+repage \
-		$output
+		"$output"
 }
 
 function generate_circle_number(){
@@ -216,7 +216,7 @@ function generate_circle_number(){
 		-layers merge \
 		+repage \
 		-background "#00000000" -gravity north -splice 0x10 \
-		$output
+		"$output"
 }
 
 function generate_string_image() {
@@ -228,8 +228,8 @@ function generate_string_image() {
 	output=$6
 	convert \
 		-font "Oxanium-Regular.ttf" \
-		-pointsize $size \
-		-fill $color \
+		-pointsize "$size" \
+		-fill "$color" \
 		-background transparent \
 		"label:$label" \
 		\( \
@@ -243,8 +243,8 @@ function generate_string_image() {
 		+repage \
 		-trim \
 		-gravity northwest \
-		-splice ${left_spacing}x${top_spacing} \
-		$output
+		-splice "${left_spacing}x${top_spacing}" \
+		"$output"
 }
 
 function generate_mod_image() {
@@ -255,7 +255,7 @@ function generate_mod_image() {
 		-size 128x128 \
 		-font "Oxanium-Regular.ttf" \
 		-pointsize 48 \
-		-background $color \
+		-background "$color" \
 		"label:$label" \
 		-draw "circle 64,64 64,24" \
 		\( \
@@ -267,7 +267,7 @@ function generate_mod_image() {
 		+swap \
 		-layers merge \
 		+repage \
-		$output
+		"$output"
 	
 }
 
@@ -276,9 +276,9 @@ function generate_mod_image() {
 sound_prefixes=( soft normal drum )
 
 function expand_all_prefix() {
-	for f in $@; do
-		for prefix in ${sound_prefixes[@]}; do
-			echo $prefix-$f
+	for f in "$@"; do
+		for prefix in "${sound_prefixes[@]}"; do
+			echo "$prefix-$f"
 		done
 	done
 }
@@ -363,8 +363,8 @@ generate_ranking_image b B '#6666bbff' +0
 generate_ranking_image c C '#bb66bbff' -40
 generate_ranking_image d D '#bb6666ff' +0
 
-for n in `seq 0 9`; do
-	generate_single_char_image $n 64 yr32/score-$n@2x.png
+for n in $(seq 0 9); do
+	generate_single_char_image "$n" 64 "yr32/score-$n@2x.png"
 done
 
 generate_single_char_image ',' 64 yr32/score-comma@2x.png
@@ -373,13 +373,13 @@ generate_single_char_image '%' 64 yr32/score-percent@2x.png
 generate_single_char_image 'x' 64 yr32/score-x@2x.png
 
 for f in ./yr32/score-*@2x.png; do
-	filename=$(basename $f)
+	filename=$(basename "$f")
 	char=${filename#score-}
 	char=${char%@2x.png}
 	convert \
-		yr32/score-$char@2x.png \
+		"yr32/score-$char@2x.png" \
 		-scale x32 \
-		yr32/scoreentry-$char@2x.png
+		"yr32/scoreentry-$char@2x.png"
 done
 
 generate_string_image 160 '#eeeeeeff' 0 0 '!UNRANKED!' yr32/play-unranked@2x.png
@@ -444,8 +444,8 @@ generate_empty_png \
 
 len=350
 center=800
-pos_x_left=$( expr $center - $len ) || true
-pos_x_right=$( expr $center + $len "*" 2 )
+pos_x_left=$(( $center - $len )) || true
+pos_x_right=$(( $center + $len * 2 ))
 pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
 pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
 
@@ -455,12 +455,12 @@ convert -size 1600x1600 \
 	-stroke "#ffffff88" \
 	-strokewidth 15 \
 	-draw """
-		circle $center,$center $center,$( expr $center + $len "*" 2 )
+	circle $center,$center $center,$(( $center + $len * 2 ))
 	""" \
 	-fill "#ffffffee" \
 	-stroke none \
 	-draw """
-		circle $center,$center $center,$( expr $center - 15 )
+		circle $center,$center $center,$(( $center - 15 ))
 	""" \
 	yr32/spinner-bottom@2x.png
 
@@ -494,7 +494,7 @@ convert -size 256x256 \
 
 
 
-for n in `seq 0 9`; do
+for n in $(seq 0 9); do
 	if [[ "${STYLE}" == "dot" ]]; then
 		HIT_CIRCLE_OVERLAP=32
 
@@ -502,29 +502,29 @@ for n in `seq 0 9`; do
 			xc:none \
 			-fill "#eeeeeeff" \
 			-draw "circle 32,32 32,1" \
-			yr32/default-$n@2x.png
+			"yr32/default-$n@2x.png"
 
 		convert yr32/default-$n@2x.png \
 			-background "#00000000" \
 			-gravity north \
 			-splice 0x10 \
-			yr32/default-$n@2x.png
+			"yr32/default-$n@2x.png"
 	else
 		HIT_CIRCLE_OVERLAP=10
-		generate_circle_number $n yr32/default-$n@2x.png
+		generate_circle_number "$n" "yr32/default-$n@2x.png"
 	fi
 done
 
-for n in `seq 0 9`; do
+for n in $(seq 0 9); do
 	convert -size 256x8 \
 		"radial-gradient:#ffffff2${n}-#ffffff00" \
-		yr32/followpoint-$(expr $n + 3)@2x.png
+		yr32/followpoint-$(($n + 3))@2x.png
 done
 
 len=16
 center=128
-pos_x_left=$( expr $center - $len - 32)
-pos_x_right=$( expr $center + $len "*" 2 - 32)
+pos_x_left=$(($center - $len - 32))
+pos_x_right=$(($center + $len "*" 2 - 32))
 pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
 pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
 
@@ -579,8 +579,8 @@ ffmpeg \
 		""" \
 	normal-hitnormal.ogg
 
-for prefix in ${sound_prefixes[@]}; do
-	cp normal-hitnormal.ogg yr32/$prefix-hitnormal.ogg
+for prefix in "${sound_prefixes[@]}"; do
+	cp normal-hitnormal.ogg "yr32/$prefix-hitnormal.ogg"
 done
 
 ffmpeg \
@@ -596,8 +596,8 @@ ffmpeg \
 		""" \
 	normal-hitfinish.ogg
 
-for prefix in ${sound_prefixes[@]}; do
-	cp normal-hitfinish.ogg yr32/$prefix-hitfinish.ogg
+for prefix in "${sound_prefixes[@]}"; do
+	cp normal-hitfinish.ogg "yr32/$prefix-hitfinish.ogg"
 done
 
 ffmpeg \
@@ -613,8 +613,8 @@ ffmpeg \
 		""" \
 	normal-slidertick.ogg
 
-for prefix in ${sound_prefixes[@]}; do
-	cp normal-slidertick.ogg yr32/$prefix-slidertick.ogg
+for prefix in "${sound_prefixes[@]}"; do
+	cp normal-slidertick.ogg "yr32/$prefix-slidertick.ogg"
 done
 
 ffmpeg \
@@ -630,8 +630,8 @@ ffmpeg \
 		""" \
 	normal-hitclap.ogg
 
-for prefix in ${sound_prefixes[@]}; do
-	cp normal-hitclap.ogg yr32/$prefix-hitclap.ogg
+for prefix in "${sound_prefixes[@]}"; do
+	cp normal-hitclap.ogg "yr32/$prefix-hitclap.ogg"
 done
 
 ffmpeg \
