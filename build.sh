@@ -444,7 +444,7 @@ generate_empty_png \
 
 len=350
 center=800
-pos_x_left=$(( $center - $len )) || true
+pos_x_left=$(( $center - $len ))
 pos_x_right=$(( $center + $len * 2 ))
 pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
 pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
@@ -524,7 +524,7 @@ done
 len=16
 center=128
 pos_x_left=$(($center - $len - 32))
-pos_x_right=$(($center + $len "*" 2 - 32))
+pos_x_right=$(($center + $len * 2 - 32))
 pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
 pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
 
