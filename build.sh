@@ -504,7 +504,7 @@ for n in $(seq 0 9); do
 			-draw "circle 32,32 32,1" \
 			"yr32/default-$n@2x.png"
 
-		convert yr32/default-$n@2x.png \
+		convert "yr32/default-$n@2x.png" \
 			-background "#00000000" \
 			-gravity north \
 			-splice 0x10 \
