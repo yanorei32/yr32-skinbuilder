@@ -38,7 +38,7 @@ fi
 
 ####################
 
-DIR="$(cd $(dirname $0) && pwd)"
+DIR="$(cd "$(dirname "$0")" && pwd)"
 
 ####################
 
@@ -444,8 +444,8 @@ generate_empty_png \
 
 len=350
 center=800
-pos_x_left=$(( $center - $len ))
-pos_x_right=$(( $center + $len * 2 ))
+pos_x_left=$(( center - len ))
+pos_x_right=$(( center + len * 2 ))
 pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
 pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
 
@@ -455,12 +455,12 @@ convert -size 1600x1600 \
 	-stroke "#ffffff88" \
 	-strokewidth 15 \
 	-draw """
-	circle $center,$center $center,$(( $center + $len * 2 ))
+	circle $center,$center $center,$(( center + len * 2 ))
 	""" \
 	-fill "#ffffffee" \
 	-stroke none \
 	-draw """
-		circle $center,$center $center,$(( $center - 15 ))
+		circle $center,$center $center,$(( center - 15 ))
 	""" \
 	yr32/spinner-bottom@2x.png
 
@@ -518,13 +518,13 @@ done
 for n in $(seq 0 9); do
 	convert -size 256x8 \
 		"radial-gradient:#ffffff2${n}-#ffffff00" \
-		yr32/followpoint-$(($n + 3))@2x.png
+		yr32/followpoint-$(( n + 3 ))@2x.png
 done
 
 len=16
 center=128
-pos_x_left=$(($center - $len - 32))
-pos_x_right=$(($center + $len * 2 - 32))
+pos_x_left=$(( center - len - 32 ))
+pos_x_right=$(( center + len * 2 - 32 ))
 pos_y_top=$( echo "$center-sqrt(3)*$len" | bc -l )
 pos_y_bottom=$( echo "$center+sqrt(3)*$len" | bc -l )
 
