@@ -559,6 +559,7 @@ fi
 
 # osu! play sounds
 
+# shellcheck disable=SC2046
 generate_empty_wav \
 	$(expand_all_prefix sliderslide) \
 	$(expand_all_prefix sliderwhistle) \
@@ -729,8 +730,9 @@ fi
 
 set -u
 
+# shellcheck disable=SC2002
 cat "${DIR}/skin.ini" \
-	| sed s/SB_VERSION/$VERSION_NAME/g \
+	| sed s/SB_VERSION/$VERSION_NAME/g "${DIR}/skin.ini" \
 	| sed s/HIT_CIRCLE_OVERLAP/$HIT_CIRCLE_OVERLAP/g \
 	> skin.ini
 
