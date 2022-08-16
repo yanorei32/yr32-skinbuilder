@@ -70,6 +70,8 @@ if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -f -s \
 		--output Inconsolata-Black.ttf \
 		https://github.com/googlefonts/Inconsolata/raw/${INCONSOLATA_COMMIT}/fonts/ttf/Inconsolata-Black.ttf
+
+	mkdir -p ~/.fonts
 	cp ./Inconsolata-Black.ttf ~/.fonts/
 fi
 
