@@ -1,0 +1,16 @@
+<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" width="500px" height="250px">
+	<text
+		x="50%" y="50%"
+		dominant-baseline="middle"
+		text-anchor="middle"
+		font-family="Inconsolata"
+		font-size="45px"
+		fill="#2060A0"
+		stroke-width="1"
+		stroke="#fff"
+		stroke-opacity="0.33"
+		transform="rotate(5)"
+	>
+		-_¡
+	</text>
+</svg>

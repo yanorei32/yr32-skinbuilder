@@ -1,0 +1,8 @@
+<svg viewBox="0 0 512 64" xmlns="http://www.w3.org/2000/svg" width="512px" height="64px">
+	<rect
+		x="5%" y="0"
+		width="90%" height="100%"
+		fill="#99f"
+		rx="10%" ry="10%"
+	/>
+</svg>

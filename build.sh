@@ -70,6 +70,7 @@ if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -f -s \
 		--output Inconsolata-Black.ttf \
 		https://github.com/googlefonts/Inconsolata/raw/${INCONSOLATA_COMMIT}/fonts/ttf/Inconsolata-Black.ttf
+	cp ./Inconsolata-Black.ttf ~/.fonts/
 fi
 
 # depName=git@github.com:sevmeyer/oxanium.git
@@ -107,6 +108,7 @@ function generate_empty_png() {
 		cp empty.png yr32/$f.png
 	done
 }
+
 
 function generate_hit_emoji() {
 	color=$1
@@ -303,7 +305,16 @@ generate_empty_png \
 	menu-snow@2x \
 	scorebar-marker@2x \
 	ranking-title@2x \
-	scorebar-bg@2x
+	scorebar-bg@2x \
+	mania-stage-hint@2x \
+	lightingN@2x \
+	lightingL@2x \
+	mania-key1@2x \
+	mania-key2@2x \
+	mania-keyS@2x \
+	mania-key1D@2x \
+	mania-key2D@2x \
+	mania-keySD@2x
 
 convert -size 32x32 \
 	xc:#50506733 \
