@@ -305,24 +305,6 @@ generate_empty_png \
 	ranking-title@2x \
 	scorebar-bg@2x
 
-convert -size 128x128 \
-	xc:none \
-	-fill none \
-	-stroke "#ffff99cc" \
-	-strokewidth 7.5 \
-	-draw """
-		circle 64,64 64,32
-	""" \
-	-stroke "#ffff99ff" \
-	-strokewidth 2 \
-	-draw """
-		line 64,48 64,80
-	""" \
-	-draw """
-		line 48,64 80,64
-	""" \
-	yr32/cursor@2x.png
-
 convert -size 32x32 \
 	xc:#50506733 \
 	yr32/cursor-smoke@2x.png
