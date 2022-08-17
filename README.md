@@ -29,7 +29,6 @@ https://github.com/yanorei32/yr32-skinbuilder/releases
 
 | Key                                                    | Value |
 |:-------------------------------------------------------|:------|
-| Graphics/DETAIL SETTINGS/Hit lighting                  | false |
 | Gameplay/GENERAL/Background dim                        | 90% + |
 | Gameplay/GENERAL/Dont't change dim level during breaks | true  |
 | Skin/SKIN/Ignore all beatmap skins                     | true  |
@@ -39,7 +38,6 @@ https://github.com/yanorei32/yr32-skinbuilder/releases
 
 | Key                                                          | Value |
 |:-------------------------------------------------------------|:------|
-| Gameplay/General/Hit lighting                                | false |
 | Gameplay/Beatmap/Beatmap skins                               | false |
 | Gameplay/Beatmap/Beatmap colours                             | false |
 | Gameplay/Beatmap/Beatmap hitsounds                           | false |
