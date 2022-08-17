@@ -309,8 +309,6 @@ generate_empty_png \
 	ranking-title@2x \
 	scorebar-bg@2x \
 	mania-stage-hint@2x \
-	lightingN@2x \
-	lightingL@2x \
 	mania-key1@2x \
 	mania-key2@2x \
 	mania-keyS@2x \
@@ -435,7 +433,11 @@ generate_empty_png \
 	spinner-osu@2x \
 	followpoint-0@2x followpoint-1@2x \
 	followpoint-2@2x followpoint-3@2x \
-	ready@2x
+	lightingN@2x \
+	lightingL@2x \
+	lighting@2x \
+	ready@2x \
+	comboburst@2x
 
 len=350
 center=800
