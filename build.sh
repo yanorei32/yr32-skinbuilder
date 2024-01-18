@@ -57,9 +57,9 @@ if [[ "${STYLE}" == "number" ]]; then
 	if [[ ! -e "Inter-$PURE_INTER_VERSION.zip" ]]; then
 		curl -L -f -s \
 			--output "Inter-$PURE_INTER_VERSION.zip" \
-			https://github.com/rsms/inter/releases/download/$INTER_VERSION/Inter-$PURE_INTER_VERSION.zip
+			"https://github.com/rsms/inter/releases/download/$INTER_VERSION/Inter-$PURE_INTER_VERSION.zip"
 
-		unzip -p Inter-$PURE_INTER_VERSION.zip "Inter Desktop/Inter-Medium.otf" > Inter-Medium.otf
+		unzip -p "Inter-$PURE_INTER_VERSION.zip" "Inter Desktop/Inter-Medium.otf" > Inter-Medium.otf
 	fi
 fi
 
@@ -95,7 +95,7 @@ function generate_empty_wav() {
 	fi
 
 	for f in "$@"; do
-		cp empty.ogg yr32/$f.ogg
+		cp empty.ogg "yr32/$f.ogg"
 	done
 }
 
@@ -107,7 +107,7 @@ function generate_empty_png() {
 	fi
 
 	for f in "$@"; do
-		cp empty.png yr32/$f.png
+		cp empty.png "yr32/$f.png"
 	done
 }
 
@@ -729,8 +729,8 @@ set -u
 
 # shellcheck disable=SC2002
 cat "${DIR}/skin.ini" \
-	| sed s/SB_VERSION/$VERSION_NAME/g "${DIR}/skin.ini" \
-	| sed s/HIT_CIRCLE_OVERLAP/$HIT_CIRCLE_OVERLAP/g \
+	| sed "s/SB_VERSION/$VERSION_NAME/g" "${DIR}/skin.ini" \
+	| sed "s/HIT_CIRCLE_OVERLAP/$HIT_CIRCLE_OVERLAP/g" \
 	> skin.ini
 
 cp "${DIR}/README.md" README.md
