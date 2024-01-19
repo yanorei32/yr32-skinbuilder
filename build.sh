@@ -51,7 +51,7 @@ cd "${DIR}/workdir"
 
 if [[ "${STYLE}" == "number" ]]; then
 	# depName=rsms/inter
-	INTER_VERSION="v3.19"
+	INTER_VERSION="v4.0"
 	PURE_INTER_VERSION="${INTER_VERSION:1}"
 
 	if [[ ! -e "Inter-$PURE_INTER_VERSION.zip" ]]; then
@@ -59,7 +59,7 @@ if [[ "${STYLE}" == "number" ]]; then
 			--output "Inter-$PURE_INTER_VERSION.zip" \
 			"https://github.com/rsms/inter/releases/download/$INTER_VERSION/Inter-$PURE_INTER_VERSION.zip"
 
-		unzip -p "Inter-$PURE_INTER_VERSION.zip" "Inter Desktop/Inter-Medium.otf" > Inter-Medium.otf
+		unzip -p "Inter-$PURE_INTER_VERSION.zip" "extras/otf/InterDisplay-Medium.otf" > InterDisplay-Medium.otf
 	fi
 fi
 
@@ -204,7 +204,7 @@ function generate_circle_number(){
 	output=$2
 
 	convert \
-		-font "Inter-Medium.otf" \
+		-font "InterDisplay-Medium.otf" \
 		-fill white \
 		-weight Bold \
 		-pointsize 120 \
