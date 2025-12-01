@@ -34,7 +34,7 @@ jobs:
           STYLE=number ./build.sh
 
       - name: pre-release
-        uses: softprops/action-gh-release@v2.4.2
+        uses: softprops/action-gh-release@v2.5.0
         if: "! startsWith(github.ref, 'refs/tags/')"
         with:
           tag_name: "latest"
@@ -43,7 +43,7 @@ jobs:
           files: "*.osk"
 
       - name: tagged-release
-        uses: softprops/action-gh-release@v2.4.2
+        uses: softprops/action-gh-release@v2.5.0
         if: startsWith(github.ref, 'refs/tags/')
         with:
           prerelease: false
