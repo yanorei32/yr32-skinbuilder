@@ -12,17 +12,13 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/checkout@v6.0.3
 
-      - uses: FedericoCarboni/setup-ffmpeg@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install inkscape
+      - name: Install inkscape and ffmpeg
         run: |
           sudo add-apt-repository -y ppa:inkscape.dev/stable
           sudo apt-get -y update
-          sudo apt-get install -y inkscape
+          sudo apt-get install -y inkscape ffmpeg
 
       - name: build-dot
         run: |
