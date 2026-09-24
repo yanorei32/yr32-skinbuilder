@@ -23,11 +23,11 @@ jobs:
 
       - name: build-dot
         run: |
-          STYLE=dot ./build.sh
+          STYLE="dot" ./build.sh
 
       - name: build-number
         run: |
-          STYLE=number ./build.sh
+          STYLE="number" ./build.sh
 
       - name: pre-release
         uses: softprops/action-gh-release@v3.0.3
