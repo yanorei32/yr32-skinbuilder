@@ -64,7 +64,7 @@ if [[ "${STYLE}" == "number" ]]; then
 fi
 
 # depName=git@github.com:googlefonts/Inconsolata.git
-INCONSOLATA_COMMIT="59be023e18e410c8f9c56fdbd72de17e6f0c05df"
+INCONSOLATA_COMMIT="39212f90dae56b526abc65121a7039a542eb11f9"
 
 if [[ ! -e Inconsolata-Black.ttf ]]; then
 	curl -L -f -s \
